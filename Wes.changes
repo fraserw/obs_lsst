@@ -1,0 +1,110 @@
+config:
+
+calibrate.py:
+
+-added colors["g-i"] = ColorLimit(primary="g_flux", secondary="i_flux", minimum=0.5, maximum=1.6)
+
+
+filterMap.py:
+
+- added ('w', 'r') to the dictionary
+
+
+ingest.py:
+
+-none
+
+ingestCalibgs.py:
+-none
+
+singleFrameDriver.py:
+-none
+
+processCcd.py:
+
+-none
+
+
+config/hsc:
+
+calibrate.py:
+
+-none
+
+colourterms.py:
+
+-added
+
+'w': Colorterm(primary="r", secondary="r"),    and   'EB-GRI': Colorterm(primary="r", secondary="r"),
+
+to the hsc* ColortermDict
+
+-added
+
+'w': Colorterm(primary="g", secondary="r", c0=-0.00816446, c1=-0.08366937, c2=-0.00726883),  and 'EB-GRI': Colorterm(primary="g", secondary="r", c0=-0.00816446, c1=-0.08366937, c2=-0.00726883),
+
+to the ps1* ColortermDict
+
+
+filterMap.py:
+
+-added
+	('EB-GRI', 'r'),
+	('gri', 'r'),
+to the last line of the filter map list
+
+
+processCcd.py:
+
+- none
+
+
+
+python/lsst/obs/hsc:
+
+hscFilters.py:
+
+-added
+
+    FilterDefinition(physical_filter="EB-gri",
+                     abstract_filter="gri",
+                     afw_name='gri', lambdaEff=623),
+
+to the end of the filter list
+
+
+hscMapper.py:
+
+-none
+
+makeTransmissionCurves.py:
+
+- none, but seems likely that changes are needed.
+
+
+
+hsc:
+
+-none
+
+
+tests:
+
+test_colorterms.py:
+
+-added 'w' to the hscBands array in testHscColorTerms
+-added "w" to the hscBands array in testPs1Colorterms
+
+
+hsc/transmission:
+
+filterTraces.py:
+- added a fake w-band transmission curve. junk.py is used to grep out the r-band tranmission, and this was 
+  >> piped to filterTraces.py, with r2 swapped to w.
+
+
+Ingestion test frames:
+
+Scie Frame: HSCA289640CC.fits HSCA289641XX.fits
+Bias Frame: HSCA289564XX.fits HSCA289565XX.fits
+Flat Frame: HSCA289578XX.fits HSCA289579XX.fits
